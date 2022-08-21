@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace VaslavNijinskyOrgApp.Models
 {
-    public class SchoolController
+    public class School
     {
-        private int Id_School {get; set;}
-        private string Name_School { get; set; }
+        public int Id {get; set;}
+        public string Name { get; set; }
     }
 }

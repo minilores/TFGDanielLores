@@ -5,13 +5,15 @@ using System.Threading.Tasks;
 
 namespace VaslavNijinskyOrgApp.Models
 {
-    public class ParticipantController
+    public class Participant
     {
-        private int Id_Participant { get; set; }
-        private string Name_Participant { get; set; }
-        private string LastName_Participant { get; set; }
-        private string BirthDate_Participant { get; set; }
-        private string EventDate_Participant { get; set; }
-        private int Id_School{ get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string BirthDate { get; set; }
+        public int Age { get; set; }
+        public int SchoolId{ get; set; }
+        public List<Choreography> Choreographies { get; set; }
+
     }
 }
