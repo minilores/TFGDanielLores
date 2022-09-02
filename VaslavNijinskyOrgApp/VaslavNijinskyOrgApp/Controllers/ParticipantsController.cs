@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using VaslavNijinskyOrgApp.Models;
 
 namespace VaslavNijinskyOrgApp.Controllers
 {
+    [EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class ParticipantsController : Controller
@@ -43,6 +45,31 @@ namespace VaslavNijinskyOrgApp.Controllers
             else
             {
                 return NotFound($"The database don´t have a participant with the Id {id}");
+            }
+        }
+
+        [HttpGet("{name}")]
+        public ActionResult<Participant> GetByName(string name)
+        {
+            if (_context.Participant.Any(p => p.Name == name))
+            {
+                return Ok(_context.Participant.Any(p => p.Name == name));
+            }
+            else
+            {
+                return NotFound($"The database don´t have a participant with the name {name}");
+            }
+        }
+        [HttpGet("{schoolName}")]
+        public ActionResult<Participant> GetBySchoolName(string schoolName)
+        {
+            if (_context.Participant.Any(p => p.SchoolName == schoolName))
+            {
+                return Ok(_context.Participant.Any(p => p.SchoolName == schoolName));
+            }
+            else
+            {
+                return NotFound($"The database don´t have a participant with the schoolName {schoolName}");
             }
         }
 

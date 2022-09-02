@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using VaslavNijinskyOrgApp.Models;
 
 namespace VaslavNijinskyOrgApp.Controllers
 {
+    [EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class SchoolsController : Controller
@@ -43,6 +45,18 @@ namespace VaslavNijinskyOrgApp.Controllers
             else
             {
                 return NotFound($"The database don´t have a school with the Id {id}");
+            }
+        }
+        [HttpGet("{name}")]
+        public ActionResult<School> GetByName(string name)
+        {
+            if (_context.School.Any(s => s.Name == name))
+            {
+                return Ok(_context.School.SingleOrDefault(s => s.Name.ToLower() == name.ToLower()));
+            }
+            else
+            {
+                return NotFound($"The database don´t have a school with the name {name}");
             }
         }
 

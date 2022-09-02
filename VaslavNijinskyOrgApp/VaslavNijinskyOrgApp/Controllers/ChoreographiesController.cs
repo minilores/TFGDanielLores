@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using VaslavNijinskyOrgApp.Models;
 
 namespace VaslavNijinskyOrgApp.Controllers
 {
+    [EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController] 
     public class ChoreographiesController : Controller
@@ -75,17 +77,16 @@ namespace VaslavNijinskyOrgApp.Controllers
             }
         }
 
-        // no funciona
-        [HttpGet("{SchoolId}")]
-        public ActionResult<Choreography> GetBySchool(int id)
+        [HttpGet("{schoolName}")]
+        public ActionResult<Choreography> GetBySchoolName(string schoolName)
         {
-            if (_context.School.Any(s => s.Id == id))
+            if (_context.Choreography.Any(c => c.SchoolName == schoolName))
             {
-                return Ok(_context.Choreography.Any(c => c.SchoolId == id));
+                return Ok(_context.Choreography.Any(c => c.SchoolName == schoolName));
             }
             else
             {
-                return NotFound($"The database don´t have a choreography with the SchoolId {id}");
+                return NotFound($"The database don´t have a choreography with the schoolName {schoolName}");
             }
         }
 
@@ -105,20 +106,14 @@ namespace VaslavNijinskyOrgApp.Controllers
         }
 
         [HttpPut]
-        public ActionResult Edit([FromBody] Choreography newChoreography)
+        public ActionResult Edit(int id, [FromBody] Choreography newChoreography)
         {
-            if (_context.Choreography.Any(c => c.Id == newChoreography.Id))
-            {
-                var ChoreographyToUpdate = _context.Choreography.Single(c => c.Id == newChoreography.Id);
-                _context.Choreography.Remove(ChoreographyToUpdate);
-                _context.Choreography.Add(newChoreography);
-                _context.SaveChanges();
-                return Ok();
-            }
-            else
-            {
-                return BadRequest($"The database don´t have a choreography with the Id {newChoreography.Id}");
-            }
+            var ChoreographyToUpdate = _context.Choreography.FirstOrDefault(c => c.Id.Equals(id));
+
+            ChoreographyToUpdate.Name = newChoreography.Name;
+
+            _context.SaveChanges();
+            return Ok();
         }
 
         [HttpDelete]

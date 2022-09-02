@@ -15,21 +15,6 @@ namespace VaslavNijinskyOrgApp.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.15");
 
-            modelBuilder.Entity("ChoreographyParticipant", b =>
-                {
-                    b.Property<int>("ChoreographiesId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MembersId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ChoreographiesId", "MembersId");
-
-                    b.HasIndex("MembersId");
-
-                    b.ToTable("ChoreographyParticipant");
-                });
-
             modelBuilder.Entity("VaslavNijinskyOrgApp.Models.Choreography", b =>
                 {
                     b.Property<int>("Id")
@@ -39,13 +24,22 @@ namespace VaslavNijinskyOrgApp.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("FinalMark")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("GroupCoach")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsFinalist")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("SchoolId")
+                    b.Property<string>("SchoolName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SemifinalMark")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -71,8 +65,8 @@ namespace VaslavNijinskyOrgApp.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("SchoolId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("SchoolName")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -91,21 +85,6 @@ namespace VaslavNijinskyOrgApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("School");
-                });
-
-            modelBuilder.Entity("ChoreographyParticipant", b =>
-                {
-                    b.HasOne("VaslavNijinskyOrgApp.Models.Choreography", null)
-                        .WithMany()
-                        .HasForeignKey("ChoreographiesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VaslavNijinskyOrgApp.Models.Participant", null)
-                        .WithMany()
-                        .HasForeignKey("MembersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
