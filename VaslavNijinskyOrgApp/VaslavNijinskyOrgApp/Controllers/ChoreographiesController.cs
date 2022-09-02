@@ -51,8 +51,7 @@ namespace VaslavNijinskyOrgApp.Controllers
                 return NotFound($"The database don´t have a choreography with the Id {id}");
             }
         }
-
-        [HttpGet("{name}")]
+        [HttpGet("Name/{name}")]
         public ActionResult<Choreography> GetByName(string name)
         {
             if (_context.Choreography.Any(c => c.Name == name))
@@ -64,7 +63,7 @@ namespace VaslavNijinskyOrgApp.Controllers
                 return NotFound($"The database don´t have a choreography with the name {name}");
             }
         }
-        [HttpGet("{category}")]
+        [HttpGet("Category/{category}")]
         public ActionResult<Choreography> GetByCategory(string category)
         {
             if (_context.Choreography.Any(c => c.Category == category))
@@ -76,8 +75,7 @@ namespace VaslavNijinskyOrgApp.Controllers
                 return NotFound($"The database don´t have a choreography with the category {category}");
             }
         }
-
-        [HttpGet("{schoolName}")]
+        [HttpGet("SchoolName/{schoolName}")]
         public ActionResult<Choreography> GetBySchoolName(string schoolName)
         {
             if (_context.Choreography.Any(c => c.SchoolName == schoolName))
@@ -111,6 +109,12 @@ namespace VaslavNijinskyOrgApp.Controllers
             var ChoreographyToUpdate = _context.Choreography.FirstOrDefault(c => c.Id.Equals(id));
 
             ChoreographyToUpdate.Name = newChoreography.Name;
+            ChoreographyToUpdate.Category = newChoreography.Category;
+            ChoreographyToUpdate.GroupCoach = newChoreography.GroupCoach;
+            ChoreographyToUpdate.SchoolName = newChoreography.SchoolName;
+            ChoreographyToUpdate.SemifinalMark = newChoreography.SemifinalMark;
+            ChoreographyToUpdate.FinalMark = newChoreography.FinalMark;
+
 
             _context.SaveChanges();
             return Ok();

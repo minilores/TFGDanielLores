@@ -33,7 +33,6 @@
 
 <script>
 
-import axios from 'axios'
 import HeaderComponent from '../components/HeaderComponent.vue'
 
 export default {
@@ -42,20 +41,19 @@ export default {
     },
     methods: {
         addParticipant: function(){
-            var participant = {
-                "name": document.getElementById("addNameParticipant").value,
-                "lastName": document.getElementById("addSurenameParticipant").value,
-                "birthDate": document.getElementById("addBirthDateParticipant").value,
-                "age": this.calculateAgeInEventDate(),
-                "schoolName": document.getElementById("addNameSchool").value
-            }
-            let isSuccess = false
-            console.log(participant)
-            axios.post('http://localhost:44334/api/Participants/', participant)   
-                .then(data => {
-                    isSuccess = true;
-                    console.log(data);
-                })
+            fetch("https://localhost:44334/api/Participants/", {
+                method: "POST",
+                body: JSON.stringify({
+                    name: document.getElementById("editNameParticipant").value,
+                    lastName: document.getElementById("editSurenameParticipant").value,
+                    birthDate: document.getElementById("editBirthDateParticipant").value,
+                    age: this.calculateAgeInEventDate(),
+                    schoolName: document.getElementById("editNameSchool").value
+                }),
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                },
+            });
         },
         calculateAgeInEventDate(){
             let birthDate = document.getElementById("addBirthDateParticipant").value

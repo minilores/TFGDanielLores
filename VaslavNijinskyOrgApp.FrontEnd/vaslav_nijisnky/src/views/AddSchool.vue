@@ -10,6 +10,7 @@
             <h4>Inserte los siguentes datos requeridos</h4>
             <div>
                 <label>Nombre de la escuela</label>
+                <br>
                 <input id="addNameSchool" type="text">
             </div>
             <button id="addButton" @click="addSchool" type="submit">Añadir</button>
@@ -34,7 +35,7 @@ export default {
                     name: document.getElementById("addNameSchool").value
                 }),
                 headers: {
-                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*"
                 },
             });
         }   

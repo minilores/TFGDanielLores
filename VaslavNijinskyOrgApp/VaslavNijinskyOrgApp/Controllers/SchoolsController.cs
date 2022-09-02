@@ -47,7 +47,7 @@ namespace VaslavNijinskyOrgApp.Controllers
                 return NotFound($"The database don´t have a school with the Id {id}");
             }
         }
-        [HttpGet("{name}")]
+        [HttpGet("Name/{name}")]
         public ActionResult<School> GetByName(string name)
         {
             if (_context.School.Any(s => s.Name == name))
@@ -76,20 +76,14 @@ namespace VaslavNijinskyOrgApp.Controllers
         }
 
         [HttpPut]
-        public ActionResult Edit([FromBody] School newSchool)
+        public ActionResult Edit(int id, [FromBody] School newSchool)
         {
-            if (_context.School.Any(s => s.Id == newSchool.Id))
-            {
-                var SchoolToUpdate = _context.School.Single(s => s.Id == newSchool.Id);
-                _context.School.Remove(SchoolToUpdate);
-                _context.School.Add(newSchool);
-                _context.SaveChanges();
-                return Ok();
-            }
-            else
-            {
-                return BadRequest($"The database don´t have a school with the Id {newSchool.Id}");
-            }
+            var SchoolToUpdate = _context.School.FirstOrDefault(c => c.Id.Equals(id));
+
+            SchoolToUpdate.Name = newSchool.Name;
+
+            _context.SaveChanges();
+            return Ok();
         }
 
         [HttpDelete]

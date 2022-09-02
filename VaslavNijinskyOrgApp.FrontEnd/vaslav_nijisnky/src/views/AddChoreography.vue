@@ -24,7 +24,7 @@
             <!-- Esto hay que investigar como pasar la información para que la entienda como array en vez de como
             texto
             -->
-            
+
             <div>
                 <label>ID's de los miembros de la coreografía</label>
                 <br>
@@ -60,20 +60,15 @@ export default {
     },
     methods: {
         addChoreography: function(){
-            var choreography = {
-                "name": document.getElementById("addNameChoreography").value,
-                "category": document.getElementById("addCategoryChoreography").value,
-                "manager": document.getElementById("addManagerChoreography").value,
-                "members": document.getElementById("addMembersChoreography").value,
-                "schoolName": document.getElementById("addNameSchool").value
-            }
-            let isSuccess = false
-            console.log(choreography)
-            axios.post('http://localhost:44334/api/Choreographies/', choreography)   
-                .then(data => {
-                    isSuccess = true;
-                    console.log(data);
-                })
+            fetch("https://localhost:44334/api/Choreographies/", {
+                method: "POST",
+                body: JSON.stringify({
+                    name: document.getElementById("addNameSchool").value
+                }),
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                },
+            });
         }  
     }
 }

@@ -48,7 +48,7 @@ namespace VaslavNijinskyOrgApp.Controllers
             }
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("Name/{name}")]
         public ActionResult<Participant> GetByName(string name)
         {
             if (_context.Participant.Any(p => p.Name == name))
@@ -60,7 +60,7 @@ namespace VaslavNijinskyOrgApp.Controllers
                 return NotFound($"The database don´t have a participant with the name {name}");
             }
         }
-        [HttpGet("{schoolName}")]
+        [HttpGet("SchoolName/{schoolName}")]
         public ActionResult<Participant> GetBySchoolName(string schoolName)
         {
             if (_context.Participant.Any(p => p.SchoolName == schoolName))
@@ -89,20 +89,17 @@ namespace VaslavNijinskyOrgApp.Controllers
         }
 
         [HttpPut]
-        public ActionResult Edit([FromBody] Participant newParticipant)
+        public ActionResult Edit(int id, [FromBody] Participant newParticipant)
         {
-            if (_context.Participant.Any(p => p.Id == newParticipant.Id))
-            {
-                var ParticipantToUpdate = _context.Participant.Single(p => p.Id == newParticipant.Id);
-                _context.Participant.Remove(ParticipantToUpdate);
-                _context.Participant.Add(newParticipant);
-                _context.SaveChanges();
-                return Ok();
-            }
-            else
-            {
-                return BadRequest($"The database don´t have a participant with the Id {newParticipant.Id}");
-            }
+            var ParticipantToUpdate = _context.Participant.FirstOrDefault(c => c.Id.Equals(id));
+
+            ParticipantToUpdate.Name = newParticipant.Name;
+            ParticipantToUpdate.LastName = newParticipant.LastName;
+            ParticipantToUpdate.BirthDate = newParticipant.BirthDate;
+            ParticipantToUpdate.SchoolName = newParticipant.SchoolName;
+
+            _context.SaveChanges();
+            return Ok();
         }
 
         [HttpDelete]

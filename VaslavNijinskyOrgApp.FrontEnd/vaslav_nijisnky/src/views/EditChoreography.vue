@@ -1,5 +1,6 @@
 <template>
     <div>
+        <HeaderComponent />
         <p>Esta es la página de editar coreografias</p>
         <router-link :to="{ name: 'Choreographies'}"><button class="route-button">Volver</button></router-link>
         <div>
@@ -66,18 +67,49 @@
 </template>
 
 <script>
+
+import HeaderComponent from '../components/HeaderComponent.vue'
+
 export default {
-    // props:{id},
-    // created(){
-    //     mounted('https://localhost:44334/api/Choreographies/' + id)
-    //         .then()
-    // },
+    components: {
+        HeaderComponent
+    },
+    data() {
+        return {
+            choreography: {},
+        };
+    },
+    created() {
+        this.getChoreographyDetails(this.$route.params.id);
+    },
+    beforeRouteUpdate(to, from) {
+        this.getChoreographyDetails(to.params.id);
+    },
     methods: {
-        addSemifinalMark(){
-
+        editChoreography: function(e){
+            var id = e.target.id
+            fetch("https://localhost:44334/api/Choreographies/" + id, {
+                method: "PUT",
+                body: JSON.stringify({
+                    name: document.getElementById("editNameChoreography").value,
+                    lastName: document.getElementById("editSurenameChoreography").value,
+                    birthDate: document.getElementById("editBirthDateChoreography").value,
+                    age: document.getElementById("editAgeChoreography").value,
+                    schoolName: document.getElementById("editNameSchool").value
+                }),
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                },
+            });
         },
-        checkIsFinalist(){
-
+        getChoreographyDetails(id) {
+            fetch("https://localhost:44334/api/Choreographies/" + id,{
+                headers:{
+                    "Access-Control-Allow-Origin": "*"
+                }
+            })
+                .then((result) => result.json())
+                .then((data) => (this.choreography = data));
         }
     }
 }
