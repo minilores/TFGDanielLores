@@ -10,7 +10,7 @@ using VaslavNijinskyOrgApp.Models;
 
 namespace VaslavNijinskyOrgApp.Controllers
 {
-    [EnableCors("MyPolicy")]
+    [EnableCors()]
     [Route("api/[controller]")]
     [ApiController] 
     public class ChoreographiesController : Controller

@@ -60,13 +60,14 @@ export default {
     },
     methods: {
         addChoreography: function(){
-            fetch("https://localhost:44334/api/Choreographies/", {
+            fetch("https://localhost:5001/api/Choreographies/", {
                 method: "POST",
                 body: JSON.stringify({
                     name: document.getElementById("addNameSchool").value
                 }),
                 headers: {
-                    "Access-Control-Allow-Origin": "*"
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-type": "application/json"
                 },
             });
         }  

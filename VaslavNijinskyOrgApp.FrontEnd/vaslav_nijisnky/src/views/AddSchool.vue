@@ -29,13 +29,14 @@ export default {
     },
     methods: {
         addSchool(){
-            fetch("https://localhost:44334/api/Schools/", {
+            fetch("https://localhost:5001/api/Schools/", {
                 method: "POST",
                 body: JSON.stringify({
                     name: document.getElementById("addNameSchool").value
                 }),
                 headers: {
-                    "Access-Control-Allow-Origin": "*"
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-type": "application/json"
                 },
             });
         }   

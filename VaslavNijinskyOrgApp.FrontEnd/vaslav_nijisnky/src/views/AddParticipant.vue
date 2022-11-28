@@ -22,6 +22,11 @@
                 <input id="addBirthDateParticipant" type="date">
             </div>
             <div>
+                <label>Edad del participante</label>
+                <br>
+                <input id="addAgeParticipant" type="number">
+            </div>
+            <div>
                 <label>Nombre de la escuela a la que pertenece el participante</label>
                 <br>
                 <input id="addNameSchool" type="text">
@@ -41,32 +46,35 @@ export default {
     },
     methods: {
         addParticipant: function(){
-            fetch("https://localhost:44334/api/Participants/", {
+            fetch("https://localhost:5001/api/Participants/", {
                 method: "POST",
                 body: JSON.stringify({
-                    name: document.getElementById("editNameParticipant").value,
-                    lastName: document.getElementById("editSurenameParticipant").value,
-                    birthDate: document.getElementById("editBirthDateParticipant").value,
-                    age: this.calculateAgeInEventDate(),
-                    schoolName: document.getElementById("editNameSchool").value
+                    name: document.getElementById("addNameParticipant").value,
+                    lastName: document.getElementById("addSurenameParticipant").value,
+                    birthDate: document.getElementById("addBirthDateParticipant").value,
+                    //age: this.calculateAgeInEventDate(),
+                    age: document.getElementById("addAgeParticipant").value,
+                    schoolName: document.getElementById("addNameSchool").value
                 }),
                 headers: {
-                    "Access-Control-Allow-Origin": "*"
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-type": "application/json"
                 },
             });
-        },
-        calculateAgeInEventDate(){
-            let birthDate = document.getElementById("addBirthDateParticipant").value
-            let eventDate = new Date("2023/03/03")
-            let age = eventDate.getFullYear() - birthDate.getFullYear()
-            let monthdiference = eventDate.getMonth() - birthDate.getMonth()
-            if ( monthdiference < 0 || (monthdiference === 0 && eventDate.getDate() < birthDate.getDate())) 
-            {
-                age--
-            }
-            return age
-            
         }
+        // ,
+        // calculateAgeInEventDate(){
+        //     let birthDate = document.getElementById("addBirthDateParticipant").value
+        //     let eventDate = new Date("2023/03/03")
+        //     let age = eventDate.getFullYear() - birthDate.getFullYear()
+        //     let monthdiference = eventDate.getMonth() - birthDate.getMonth()
+        //     if ( monthdiference < 0 || (monthdiference === 0 && eventDate.getDate() < birthDate.getDate())) 
+        //     {
+        //         age--
+        //     }
+        //     return age
+            
+        // }
     }
 }   
 </script>

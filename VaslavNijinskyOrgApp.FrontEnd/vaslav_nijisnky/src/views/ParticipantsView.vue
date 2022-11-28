@@ -28,7 +28,7 @@ export default {
         HeaderComponent
     },  
     created() {
-        fetch("https://localhost:44334/api/Participants", {
+        fetch("https://localhost:5001/api/Participants", {
             headers: {
                 "Access-Control-Allow-Origin": "*"
             }

@@ -36,6 +36,18 @@ namespace VaslavNijinskyOrgApp
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "VaslavNijinskyOrgApp", Version = "v1" });
             });
             services.AddDbContext<EventDb>(o => o.UseSqlite(@"Data Source=.\\event.db"));
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder
+                        //.AllowAnyOrigin()
+                        .WithOrigins("https://localhost:8080")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
+            });
 
         }
 
@@ -53,9 +65,9 @@ namespace VaslavNijinskyOrgApp
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseCors();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

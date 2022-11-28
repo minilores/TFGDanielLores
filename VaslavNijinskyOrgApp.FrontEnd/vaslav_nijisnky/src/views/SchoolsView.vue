@@ -24,7 +24,7 @@ export default {
         HeaderComponent
     },
     created() {
-        fetch("https://localhost:44334/api/Schools", {
+        fetch("https://localhost:5001/api/Schools", {
             headers: {
                 "Access-Control-Allow-Origin": "*"
             }

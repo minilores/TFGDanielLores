@@ -28,7 +28,7 @@ export default {
     HeaderComponent
   },
   created() {
-    fetch("https://localhost:44334/api/Choreographies", {
+    fetch("https://localhost:5001/api/Choreographies", {
             headers: {
                 "Access-Control-Allow-Origin": "*"
             }

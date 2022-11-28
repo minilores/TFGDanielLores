@@ -154,3 +154,4 @@ C:\Users\dlores\Documents\Grado\TFG\TFGDanielLores\VaslavNijinskyOrgApp\VaslavNi
 C:\Users\dlores\Documents\Grado\TFG\TFGDanielLores\VaslavNijinskyOrgApp\VaslavNijinskyOrgApp\obj\Debug\net5.0\ref\VaslavNijinskyOrgApp.dll
 C:\Users\dlores\Documents\Grado\TFG\TFGDanielLores\VaslavNijinskyOrgApp\VaslavNijinskyOrgApp\obj\Debug\net5.0\VaslavNijinskyOrgApp.pdb
 C:\Users\dlores\Documents\Grado\TFG\TFGDanielLores\VaslavNijinskyOrgApp\VaslavNijinskyOrgApp\obj\Debug\net5.0\VaslavNijinskyOrgApp.genruntimeconfig.cache
+C:\Users\A8-PC100\Documents\Dani\TFGDanielLores\VaslavNijinskyOrgApp\VaslavNijinskyOrgApp\obj\Debug\net5.0\VaslavNijinskyOrgApp.pdb
