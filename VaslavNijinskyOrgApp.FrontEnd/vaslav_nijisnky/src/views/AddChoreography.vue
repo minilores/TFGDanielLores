@@ -63,7 +63,10 @@ export default {
             fetch("https://localhost:5001/api/Choreographies/", {
                 method: "POST",
                 body: JSON.stringify({
-                    name: document.getElementById("addNameSchool").value
+                    name: document.getElementById("addNameChoreography").value,
+                    category: document.getElementById("addCategoryChoreography").value,
+                    groupCoach: document.getElementById("addManagerChoreography").value,
+                    schoolName: document.getElementById("addNameSchool").value
                 }),
                 headers: {
                     "Access-Control-Allow-Origin": "*",

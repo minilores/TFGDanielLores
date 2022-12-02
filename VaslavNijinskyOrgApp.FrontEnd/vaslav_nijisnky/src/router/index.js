@@ -9,6 +9,7 @@ import AddSchool from '../views/AddSchool.vue'
 import EditChoreography from '../views/EditChoreography.vue'
 import EditParticipant from '../views/EditParticipant.vue'
 import EditSchool from '../views/EditSchool.vue'
+import EvaluateChoreography from '../views/EvaluateChoreography.vue'
 
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -22,6 +23,12 @@ const routes = [
     path: '/Choreographies',
     name: 'Choreographies',
     component: ChoreographiesView
+  },
+  {
+    path: '/EvaluateChoreography',
+    name: 'EvaluateChoreography',
+    component: EvaluateChoreography,
+    props: true
   },
   {
     path: '/AddChoreography',

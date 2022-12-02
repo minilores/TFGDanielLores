@@ -13,6 +13,7 @@
                 <h4 v-if="choreography.isFinalist" class="label-style">Nota de la final: {{choreography.finalMark}}</h4>
 
                 <router-link :to="{ name: 'Choreographies_id', params: { id: choreography.id } }"><button class="route-button">Editar</button></router-link>
+                <router-link :to="{ name: 'EvaluateChoreography', params: { id: choreography.id } }"><button class="route-button">Valorar</button></router-link>
                 <button class="route-button" @click="deleteChoreography(choreography.id)" type="submit">Borrar</button>
             </li>
         </ul>
@@ -43,7 +44,7 @@ export default {
   },
   methods: {
         deleteChoreography(id) {
-            fetch("https://localhost:44334/api/Choreographies/" + id), {
+            fetch("https://localhost:5001/api/Choreographies/" + id), {
                 method: "DELETE",
                 body: JSON.stringify({
                     Id: id,
@@ -52,7 +53,7 @@ export default {
                     "Access-Control-Allow-Origin": "*"
                 },
             };
-            fetch("https://localhost:44334/api/Choreographies", {
+            fetch("https://localhost:5001/api/Choreographies", {
                 headers: {
                     "Access-Control-Allow-Origin": "*"
                 }

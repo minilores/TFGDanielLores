@@ -65,15 +65,14 @@ export default {
         // ,
         // calculateAgeInEventDate(){
         //     let birthDate = document.getElementById("addBirthDateParticipant").value
-        //     let eventDate = new Date("2023/03/03")
+        //     let eventDate = new Date()
         //     let age = eventDate.getFullYear() - birthDate.getFullYear()
         //     let monthdiference = eventDate.getMonth() - birthDate.getMonth()
         //     if ( monthdiference < 0 || (monthdiference === 0 && eventDate.getDate() < birthDate.getDate())) 
         //     {
-        //         age--
+        //        age--
         //     }
         //     return age
-            
         // }
     }
 }   
