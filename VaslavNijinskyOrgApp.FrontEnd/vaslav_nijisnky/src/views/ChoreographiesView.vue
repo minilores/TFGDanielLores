@@ -7,13 +7,13 @@
             <li v-for="choreography in choreographies" :key="choreography.id">
                 <h4 class="label-style">Nombre: {{choreography.name}}</h4>
                 <h4 class="label-style">Categoría: {{choreography.category}}</h4>
-                <h4 class="label-style">Manager: {{choreography.groupCoach}}</h4>
+                <h4 class="label-style">Manager: {{choreography.manager}}</h4>
                 <h4 class="label-style">Nombre de la escuela: {{choreography.schoolName}}</h4>
                 <h4 class="label-style">Nota de la semifinal: {{choreography.semifinalMark}}</h4>
                 <h4 v-if="choreography.isFinalist" class="label-style">Nota de la final: {{choreography.finalMark}}</h4>
 
                 <router-link :to="{ name: 'Choreographies_id', params: { id: choreography.id } }"><button class="route-button">Editar</button></router-link>
-                <router-link :to="{ name: 'EvaluateChoreography', params: { id: choreography.id } }"><button class="route-button">Valorar</button></router-link>
+                <!-- <router-link :to="{ name: 'EvaluateChoreography', params: { id: choreography.id } }"><button class="route-button">Valorar</button></router-link> -->
                 <button class="route-button" @click="deleteChoreography(choreography.id)" type="submit">Borrar</button>
             </li>
         </ul>
@@ -46,9 +46,9 @@ export default {
         deleteChoreography(id) {
             fetch("https://localhost:5001/api/Choreographies/" + id), {
                 method: "DELETE",
-                body: JSON.stringify({
-                    Id: id,
-                }),
+                // body: JSON.stringify({
+                //     Id: id,
+                // }),
                 headers: {
                     "Access-Control-Allow-Origin": "*"
                 },

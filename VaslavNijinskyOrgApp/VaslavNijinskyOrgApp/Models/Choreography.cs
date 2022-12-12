@@ -14,11 +14,7 @@ namespace VaslavNijinskyOrgApp.Models
         public string Name { get; set; }
         public string Category { get; set; }
         public string SchoolName { get; set; }
-        public string GroupCoach { get; set; }
-
-        [NotMapped]
-        public int[] Members { get; set; }
-
+        public string Manager { get; set; }
         public int SemifinalMark { get; set; }
         public bool IsFinalist { get; set; }
         public int FinalMark { get; set; }

@@ -103,16 +103,17 @@ namespace VaslavNijinskyOrgApp.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public ActionResult Edit(int id, [FromBody] Choreography newChoreography)
         {
             var ChoreographyToUpdate = _context.Choreography.FirstOrDefault(c => c.Id.Equals(id));
 
             ChoreographyToUpdate.Name = newChoreography.Name;
             ChoreographyToUpdate.Category = newChoreography.Category;
-            ChoreographyToUpdate.GroupCoach = newChoreography.GroupCoach;
+            ChoreographyToUpdate.Manager = newChoreography.Manager;
             ChoreographyToUpdate.SchoolName = newChoreography.SchoolName;
             ChoreographyToUpdate.SemifinalMark = newChoreography.SemifinalMark;
+            ChoreographyToUpdate.IsFinalist = newChoreography.IsFinalist;
             ChoreographyToUpdate.FinalMark = newChoreography.FinalMark;
 
 
@@ -120,7 +121,7 @@ namespace VaslavNijinskyOrgApp.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
 

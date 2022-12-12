@@ -8,60 +8,40 @@
             <div>
                 <label>Nombre de la coreografía</label>
                 <br>
-                <input id="addNameChoreography" class="inputs-data" type="text" value="">
+                <input id="editNameChoreography" class="inputs-data" type="text" v-bind:value="choreography.name">
             </div>
             <div>
                 <label>Categoría de la coreografía</label>
                 <br>
-                <input id="addCategoryChoreography" class="inputs-data" type="text">
+                <input id="editCategoryChoreography" class="inputs-data" type="text" v-bind:value="choreography.category">
             </div>
             <div>
                 <label>Manager de la coreografía</label>
                 <br>
-                <input id="addManagerChoreography" class="inputs-data" type="text">
-            </div>
-
-            <!-- Esto hay que investigar como pasar la información para que la entienda como array en vez de como
-            texto
-            -->
-            
-            <div>
-                <label>ID's de los miembros de la coreografía</label>
-                <br>
-                <!-- Esta parte falta de hacer. Por lo pronto es necesario una view para los detalles 
-                de la escuela y pasarle por parametro el nombre de la misma para atacar al endpoint de 
-                GetBySchoolName del controlador de coreografias
-                
-                <h5>Si no conoce los ID's de sus alumnos, consultelos aquí</h5>
-                <label>Introduce el nombre de tu escuela</label>
-                <input type="text">
-                <br>
-                <router-link :to="{ name: 'Home'}"><button class="route-button">Buscar</button></router-link> -->
-                <input id="addMembersChoreography" class="inputs-data" type="text">
+                <input id="editManagerChoreography" class="inputs-data" type="text" v-bind:value="choreography.manager">
             </div>
             <div>
-                <label>Nota en el clasificatorio de los jueces</label>
+                <label>Nota de la semifinal</label>
                 <br>
-                <input id="addSemifinalMarkJudge1" class="inputs-data" type="number">
-                <input id="addSemifinalMarkJudge2" class="inputs-data" type="number">
-                <input id="addSemifinalMarkJudge3" class="inputs-data" type="number">
+                <input id="editSemifinalMark" class="inputs-data" type="number" v-bind:value="choreography.semifinalMark">
             </div>
             <div>
-                <label>Nota de corte para el pase a la final</label>
+                <label>¿Es finalista?</label>
                 <br>
-                <input id="addManagerChoreography" class="inputs-data" type="number">
+                <input id="editIsFinalist" class="inputs-data" type="text" v-bind:value="choreography.isFinalist">
             </div>
-            <div v-if="isFinalist">
+            <div>
                 <label>Nota de la final</label>
                 <br>
-                <input id="addManagerChoreography" class="inputs-data" type="number">
+                <input id="editFinalMark" class="inputs-data" type="number" v-bind:value="choreography.finalMark">
             </div>
             <div>
                 <label>Nombre de la escuela a la que pertenece la coreografía</label>
                 <br>
-                <input id="addNameSchool" class="inputs-data" type="text">
+                <input id="editNameSchool" class="inputs-data" type="text" v-bind:value="choreography.schoolName">
             </div>
-            <button id="addButton" @click="addChoreography" type="submit">Editar</button>
+            <button id="editButton" @click="editChoreography(choreography.id)" type="submit">Editar</button>
+            <button id="resetButton" type="reset">Reestablecer</button>
         </div>
     </div>
 </template>
@@ -86,24 +66,26 @@ export default {
         this.getChoreographyDetails(to.params.id);
     },
     methods: {
-        editChoreography: function(e){
-            var id = e.target.id
-            fetch("https://localhost:44334/api/Choreographies/" + id, {
+        editChoreography(id){
+            fetch("https://localhost:5001/api/Choreographies/" + id, {
                 method: "PUT",
                 body: JSON.stringify({
                     name: document.getElementById("editNameChoreography").value,
-                    lastName: document.getElementById("editSurenameChoreography").value,
-                    birthDate: document.getElementById("editBirthDateChoreography").value,
-                    age: document.getElementById("editAgeChoreography").value,
-                    schoolName: document.getElementById("editNameSchool").value
+                    category: document.getElementById("editCategoryChoreography").value,
+                    manager: document.getElementById("editManagerChoreography").value,
+                    schoolName: document.getElementById("editNameSchool").value,
+                    semifinalMark: document.getElementById("editSemifinalMark").value,
+                    isFinalist: document.getElementById("editIsFinalist").value,
+                    finalMark: document.getElementById("editFinalMark").value
                 }),
                 headers: {
-                    "Access-Control-Allow-Origin": "*"
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-type": "application/json"  
                 },
             });
         },
         getChoreographyDetails(id) {
-            fetch("https://localhost:44334/api/Choreographies/" + id,{
+            fetch("https://localhost:5001/api/Choreographies/" + id,{
                 headers:{
                     "Access-Control-Allow-Origin": "*"
                 }

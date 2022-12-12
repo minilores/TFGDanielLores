@@ -7,7 +7,7 @@
             <li v-for="school in schools" :key="school.id">
                 <h4 class="label-style">Escuela: {{school.name}}</h4>
                 <router-link :to="{ name: 'Schools_id', params: { id: school.id }  }"><button class="route-button">Editar</button></router-link>
-                <button class="route-button" @click="deleteSchool(school.id)" type="submit">Borrar</button>
+                <button class="route-button" @click="deleteSchool(school.id, school.name)" type="submit">Borrar</button>
             </li>
         </ul>
     </div>
@@ -15,8 +15,6 @@
 
 <script>
 
-import api from '../utils/api'
-import axios from 'axios'
 import HeaderComponent from '../components/HeaderComponent.vue'
 
 export default {
@@ -38,17 +36,18 @@ export default {
         };
     },
     methods: {
-        deleteSchool(id) {
-            fetch("https://localhost:44334/api/Schools/" + id), {
-                method: "DELETE",
+        deleteSchool(id, schoolName) {
+            fetch("https://localhost:5001/api/Schools/" + id), {
+                method: 'DELETE',
                 body: JSON.stringify({
-                    schoolId: id,
+                    name: schoolName
                 }),
                 headers: {
-                    "Access-Control-Allow-Origin": "*"
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-type": "application/json" 
                 },
             };
-            fetch("https://localhost:44334/api/Schools", {
+            fetch("https://localhost:5001/api/Schools", {
                 headers: {
                     "Access-Control-Allow-Origin": "*"
                 }

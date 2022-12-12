@@ -7,32 +7,33 @@
         <router-link :to="{ name: 'Participants'}"><button class="route-button">Volver</button></router-link>
         <div>
             <h4>Inserte los siguentes datos requeridos</h4>
-            <div>
+            <div class="attributeToEdit">
                 <label>Nombre del participante</label>
                 <br>
-                <input id="editNameParticipant" type="text" v-bind:value="participant.name">
+                <input class="inputToEdit" id="editNameParticipant" type="text" v-bind:value="participant.name">
             </div>
-            <div>
+            <div class="attributeToEdit">
                 <label>Apellido del participante</label>
                 <br>
-                <input id="editSurenameParticipant" type="text" v-bind:value="participant.lastName">
+                <input class="inputToEdit" id="editSurenameParticipant" type="text" v-bind:value="participant.lastName">
             </div>
-            <div>
+            <div class="attributeToEdit">
                 <label>Fecha de nacimiento del participante</label>
                 <br>
-                <input id="editBirthDateParticipant" type="date" v-bind:value="participant.birthDate">
+                <input class="inputToEdit" id="editBirthDateParticipant" type="date" v-bind:value="participant.birthDate">
             </div>
-            <div>
+            <div class="attributeToEdit">
                 <label>Edad del participante</label>
                 <br>
-                <input id="editAgeParticipant" type="date" v-bind:value="participant.age">
+                <input class="inputToEdit" id="editAgeParticipant" type="number" v-bind:value="participant.age">
             </div>
-            <div>
+            <div class="attributeToEdit">
                 <label>Nombre de la escuela a la que pertenece el participante</label>
                 <br>
-                <input id="editNameSchool" type="text" v-bind:value="participant.schoolName ">
+                <input class="inputToEdit" id="editNameSchool" type="text" v-bind:value="participant.schoolName ">
             </div>
-            <button id="editButton" @click="editParticipant" type="submit">Editar</button>
+            <router-link :to="{ name: 'Participants'}"><button class="attributeToEdit" id="editButton" @click="editParticipant(participant.id)" type="submit">Editar</button></router-link>
+            
         </div>
     </div>
 </template>
@@ -56,9 +57,8 @@ export default {
         this.getParticipantDetails(to.params.id);
     },
     methods: {
-        editParticipant: function(e){
-            var id = e.target.id
-            fetch("https://localhost:44334/api/Participants/" + id, {
+        editParticipant(id){
+            fetch("https://localhost:5001/api/Participants/" + id, {
                 method: "PUT",
                 body: JSON.stringify({
                     name: document.getElementById("editNameParticipant").value,
@@ -68,12 +68,13 @@ export default {
                     schoolName: document.getElementById("editNameSchool").value
                 }),
                 headers: {
-                    "Access-Control-Allow-Origin": "*"
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-type": "application/json"  
                 },
             });
         },
         getParticipantDetails(id) {
-            fetch("https://localhost:44334/api/Participants/" + id,{
+            fetch("https://localhost:5001/api/Participants/" + id,{
                 headers:{
                     "Access-Control-Allow-Origin": "*"
                 }
@@ -86,5 +87,11 @@ export default {
 </script>
 
 <style>
+.attributeToEdit{
+    margin-top: 10px;
+}
 
+.inputToEdit{
+    margin-top: 5px;
+}
 </style>

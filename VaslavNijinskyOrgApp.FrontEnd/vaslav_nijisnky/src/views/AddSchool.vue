@@ -13,7 +13,7 @@
                 <br>
                 <input id="addNameSchool" type="text">
             </div>
-            <button id="addButton" @click="addSchool" type="submit">Añadir</button>
+            <router-link :to="{ name: 'Schools'}"><button id="addButton" @click="addSchool" type="submit">Añadir</button></router-link>
         </div>
     </div>
 </template>

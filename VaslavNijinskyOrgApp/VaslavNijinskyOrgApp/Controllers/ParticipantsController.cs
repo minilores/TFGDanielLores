@@ -88,7 +88,7 @@ namespace VaslavNijinskyOrgApp.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public ActionResult Edit(int id, [FromBody] Participant newParticipant)
         {
             var ParticipantToUpdate = _context.Participant.FirstOrDefault(c => c.Id.Equals(id));
@@ -96,13 +96,14 @@ namespace VaslavNijinskyOrgApp.Controllers
             ParticipantToUpdate.Name = newParticipant.Name;
             ParticipantToUpdate.LastName = newParticipant.LastName;
             ParticipantToUpdate.BirthDate = newParticipant.BirthDate;
+            ParticipantToUpdate.Age = newParticipant.Age;
             ParticipantToUpdate.SchoolName = newParticipant.SchoolName;
 
             _context.SaveChanges();
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
 

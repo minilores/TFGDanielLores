@@ -75,7 +75,7 @@ namespace VaslavNijinskyOrgApp.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public ActionResult Edit(int id, [FromBody] School newSchool)
         {
             var SchoolToUpdate = _context.School.FirstOrDefault(c => c.Id.Equals(id));
@@ -85,9 +85,9 @@ namespace VaslavNijinskyOrgApp.Controllers
             _context.SaveChanges();
             return Ok();
         }
-
-        [HttpDelete]
-        public ActionResult Delete(int id)
+        
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)  
         {
 
             if (_context.School.Any(s => s.Id == id))
